@@ -10,6 +10,8 @@ consul:
   client:
     registration:
       enabled: true
+      ip-addr: ${CONSUL_REG_IP}
+      prefer-ip-address: true
     defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
 ---
 #endpoints:

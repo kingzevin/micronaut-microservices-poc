@@ -2,7 +2,7 @@ micronaut:
   application:
     name: gateway
   server:
-    host: localhost
+    host: ${SERVICE_HOST:0.0.0.0}
     port: ${SERVICE_PORT:8081}
     cors:
       enabled: true
@@ -29,6 +29,8 @@ consul:
   client:
     registration:
       enabled: false
+      ip-addr: ${CONSUL_REG_IP}
+      prefer-ip-address: true
     defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
 ---
 tracing:

@@ -2,12 +2,12 @@ micronaut:
   application:
     name: documents-service
   server:
-    host: localhost
+    host: ${SERVICE_HOST:0.0.0.0}
     port: ${SERVICE_PORT:-1}
 ---
 datasources:
   default:
-    url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
     driverClassName: org.h2.Driver
     username: sa
     password: ''
@@ -35,6 +35,8 @@ consul:
     client:
         registration:
             enabled: true
+            ip-addr: ${CONSUL_REG_IP}
+            prefer-ip-address: true
         defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
 ---
 tracing:
