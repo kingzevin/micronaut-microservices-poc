@@ -2,9 +2,9 @@ package pl.altkom.asc.lab.micronaut.poc.serverless.product.service.infrastructur
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import pl.altkom.asc.lab.micronaut.poc.product.service.api.v1.CoverDto;
-import pl.altkom.asc.lab.micronaut.poc.product.service.api.v1.ProductDto;
-import pl.altkom.asc.lab.micronaut.poc.product.service.api.v1.questions.*;
+import pl.altkom.asc.lab.micronaut.poc.serverless.product.service.api.v1.CoverDto;
+import pl.altkom.asc.lab.micronaut.poc.serverless.product.service.api.v1.ProductDto;
+import pl.altkom.asc.lab.micronaut.poc.serverless.product.service.api.v1.questions.*;
 import pl.altkom.asc.lab.micronaut.poc.serverless.product.service.domain.*;
 
 import java.util.ArrayList;

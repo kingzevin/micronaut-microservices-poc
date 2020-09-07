@@ -14,7 +14,7 @@ import java.util.List;
 public class DataLoader implements ApplicationEventListener<ServerStartupEvent> {
 
     private final ProductsRepository productsRepository;
-    public boolean initialized = false;
+    public static Object initializedFlag = new Object();
     @Override
     public void onApplicationEvent(ServerStartupEvent serverStartupEvent) {
         List<Product> allProducts = productsRepository.findAll().blockingGet();
@@ -34,6 +34,8 @@ public class DataLoader implements ApplicationEventListener<ServerStartupEvent> 
         if (allProducts.stream().noneMatch(p -> p.getCode().equals("TRI"))) {
             productsRepository.add(DemoProductsFactory.travel()).blockingGet();
         }
-        initialized = true;
+        synchronized(initializedFlag){
+            initializedFlag.notify();
+        }
     }
 }

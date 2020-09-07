@@ -1,9 +1,9 @@
 micronaut:
   application:
-    name: product-service
+    name: serverless-product-service
   server:
     host: ${SERVICE_HOST:0.0.0.0}
-    port: ${SERVICE_PORT:8088}
+    port: ${SERVICE_PORT:7088}
 #  metrics:
 #    enabled: true
 ---
@@ -19,7 +19,7 @@ jackson:
 #    sensitive: false
 ---
 mongodb:
-    uri: "mongodb://${MG_HOST:localhost}:${MG_PORT:27017}/demo"
+    uri: "mongodb://${MG_HOST:172.17.0.1}:${MG_PORT:27019}/demo"
     cluster:
       maxWaitQueueSize: 5
     connectionPool:
@@ -29,15 +29,15 @@ consul:
   client:
     registration:
       enabled: true
-      ip-addr: ${CONSUL_REG_IP}
+      ip-addr: ${CONSUL_REG_IP:172.17.0.1}
       prefer-ip-address: true
-    defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
+    defaultZone: "${CONSUL_HOST:172.17.0.1}:${CONSUL_PORT:8500}"
 ---
 tracing:
   zipkin:
     enabled: true
     http:
-      url: "http://${ZIPKIN_HOST:localhost}:${ZIPKIN_PORT:9411}"
+      url: "http://${ZIPKIN_HOST:172.17.0.1}:${ZIPKIN_PORT:9411}"
       sampler:
         probability: 1.0 # Configuration taking 100% of the request to be processed by Zipkin. In a real production system, that could be overwhelming.
 

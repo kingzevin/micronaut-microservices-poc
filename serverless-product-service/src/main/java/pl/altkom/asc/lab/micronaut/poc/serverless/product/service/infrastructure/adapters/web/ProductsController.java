@@ -4,8 +4,8 @@ import io.micronaut.http.annotation.Controller;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import lombok.RequiredArgsConstructor;
-import pl.altkom.asc.lab.micronaut.poc.product.service.api.v1.ProductDto;
-import pl.altkom.asc.lab.micronaut.poc.product.service.api.v1.ProductOperations;
+import pl.altkom.asc.lab.micronaut.poc.serverless.product.service.api.v1.ProductDto;
+import pl.altkom.asc.lab.micronaut.poc.serverless.product.service.api.v1.ProductOperations;
 import pl.altkom.asc.lab.micronaut.poc.serverless.product.service.domain.Products;
 
 import java.util.List;

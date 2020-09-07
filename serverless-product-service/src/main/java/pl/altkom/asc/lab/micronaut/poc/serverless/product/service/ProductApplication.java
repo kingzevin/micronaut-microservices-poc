@@ -1,5 +1,7 @@
 package pl.altkom.asc.lab.micronaut.poc.serverless.product.service;
 
+import pl.altkom.asc.lab.micronaut.poc.serverless.product.service.init.DataLoader;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.micronaut.runtime.Micronaut;
@@ -22,7 +24,7 @@ import org.json.simple.parser.ParseException;
 
 public class ProductApplication {
     private static boolean initFlag = false;
-    private static int port = 8088;
+    private static int port = 7088;
 
     public static void main(String[] args) {
         Micronaut.run(ProductApplication.class);
@@ -30,10 +32,17 @@ public class ProductApplication {
 
     public static JsonObject main(JsonObject args) throws Exception{
         if(!initFlag){
-            String[] s = {""};
+
             // initialize in another thread.
-            ProductApplication.main(s);
+            Thread listenThread = new Thread(()->{
+                String[] s = {""};
+                ProductApplication.main(s);
+            });
+            listenThread.start();
             // await initialization.
+            synchronized(DataLoader.initializedFlag){
+                DataLoader.initializedFlag.wait();
+            }
             initFlag = true;
         }
 
