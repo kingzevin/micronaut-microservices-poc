@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: serverless.dashboard.service
+---
+testFramework: junit
+sourceLanguage: java
