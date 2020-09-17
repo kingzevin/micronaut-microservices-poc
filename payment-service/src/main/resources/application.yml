@@ -34,7 +34,7 @@ payments:
 ---
 datasources:
   default:
-    url: jdbc:h2:mem:default;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:tcp://172.17.0.1:1521/test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     username: sa
     password: ""
     driverClassName: org.h2.Driver
