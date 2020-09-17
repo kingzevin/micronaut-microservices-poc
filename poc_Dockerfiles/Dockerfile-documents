@@ -1,0 +1,3 @@
+FROM openwhisk/java8action:nightly
+COPY documents /javaAction/libs
+CMD java -Dfile.encoding=UTF-8 -Xshareclasses:cacheDir=/javaSharedCache,readonly -Xquickstart -cp "/javaAction/build/libs/javaAction-all.jar:/javaAction/libs/libs/*" org.apache.openwhisk.runtime.java.action.Proxy
