@@ -1,0 +1,32 @@
+micronaut:
+  application:
+    name: documents-service
+  server:
+    host: ${SERVICE_HOST:0.0.0.0}
+    port: 7088
+---
+datasources:
+  default:
+    url: jdbc:h2:tcp://172.17.0.1:1521/test;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+---
+jpa:
+    default:
+        packages-to-scan:
+        - 'pl.altkom.asc.lab.micronaut.poc.serverless.documents.domain'
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: update
+                show_sql: true
+---
+jackson:
+    serialization:
+        failOnEmptyBeans: false
+        writeDatesAsTimestamps: true
+---
+jsreport:
+  host: ${JSREPORT_HOST:172.17.0.1}
+  port: ${JSREPORT_PORT:5488}
