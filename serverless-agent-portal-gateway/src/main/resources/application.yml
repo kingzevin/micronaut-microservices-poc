@@ -1,0 +1,59 @@
+micronaut:
+  application:
+    name: gateway
+  server:
+    host: ${SERVICE_HOST:0.0.0.0}
+    port: ${SERVICE_PORT:7088}
+    cors:
+      enabled: true
+  http:
+    services:
+      product-service:
+        urls:
+          - http://172.17.0.1:10001
+        path: /api/v1/web/guest/poc/serverless-product-service/products
+      dashboard-service:
+        urls:
+          - http://172.17.0.1:10001
+        path: /api/v1/web/guest/poc/serverless-dashboard-service/dashboard
+      documents-service:
+        urls:
+          - http://172.17.0.1:10001
+        path: /api/v1/web/guest/poc/serverless-documents-service/documents
+      payment-service:
+        urls:
+          - http://172.17.0.1:10001
+        path: /api/v1/web/guest/poc/serverless-payment-service/payment
+      policy-service:
+        urls:
+          - http://172.17.0.1:10001
+        path: /api/v1/web/guest/poc/serverless-policy-service/policy
+      policy-search-service:
+        urls:
+          - http://172.17.0.1:10001
+        path: /api/v1/web/guest/poc/serverless-policy-search-service/policies
+  security:
+    enabled: true
+    intercept-url-map:
+      - pattern: /swagger/**
+        access:
+          - isAnonymous()
+    token:
+      jwt:
+        enabled: true
+        signatures:
+          secret:
+            generator:
+              secret: pleaseChangeThisSecretForANewOne
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+---
+consul:
+  client:
+    defaultZone: "${CONSUL_HOST:172.17.0.1}:${CONSUL_PORT:8500}"
+---
+jackson:
+  dateFormat: dd.MM.yyyy
