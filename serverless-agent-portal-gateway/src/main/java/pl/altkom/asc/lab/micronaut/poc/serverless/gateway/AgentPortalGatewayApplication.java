@@ -43,9 +43,10 @@ public class AgentPortalGatewayApplication {
 
 
   public static JsonObject main(JsonObject args) throws Exception{
-    if(!initFlag){
-
-      // initialize in another thread.
+    try(Socket ignored = new Socket("localhost", port)){
+      // used, i.e., started
+    } catch(Exception e){
+      // not started
       Thread listenThread = new Thread(()->{
         String[] s = {""};
         main(s);
@@ -53,19 +54,18 @@ public class AgentPortalGatewayApplication {
       listenThread.start();
       System.out.println("Waiting for initialization");
       // await initialization.
-      synchronized(InitDone.initializedFlag){
-        InitDone.initializedFlag.wait();
-      }
-//      while(true){
-//        try(Socket ignored = new Socket("localhost", port)){
-//          // used, i.e., started
-//          break;
-//        } catch(Exception e){
-//          System.out.println("  Still waiting!");
-//          Thread.sleep(10);
-//        }
+//      synchronized(InitDone.initializedFlag){
+//        InitDone.initializedFlag.wait();
 //      }
-      initFlag = true;
+      while(true){
+        try(Socket ignored = new Socket("localhost", port)){
+          // used, i.e., started
+          break;
+        } catch(Exception ee){
+          System.out.println("  Still waiting!");
+          Thread.sleep(10);
+        }
+      }
     }
 
     JsonObject result = new JsonObject();

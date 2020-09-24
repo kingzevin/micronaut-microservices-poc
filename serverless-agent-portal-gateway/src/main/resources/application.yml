@@ -26,8 +26,10 @@ micronaut:
         path: /api/v1/web/guest/poc/serverless-payment-service/payment
       policy-service:
         urls:
+#          - http://172.17.0.1:9088
           - http://172.17.0.1:10001
-        path: /api/v1/web/guest/poc/serverless-policy-service/policy
+        path: /api/v1/web/guest/poc/serverless-policy-service
+#        path: /
       policy-search-service:
         urls:
           - http://172.17.0.1:10001
@@ -50,10 +52,6 @@ micronaut:
       swagger:
         paths: classpath:META-INF/swagger
         mapping: /swagger/**
----
-consul:
-  client:
-    defaultZone: "${CONSUL_HOST:172.17.0.1}:${CONSUL_PORT:8500}"
 ---
 jackson:
   dateFormat: dd.MM.yyyy

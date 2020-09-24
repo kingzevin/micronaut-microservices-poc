@@ -17,6 +17,7 @@ import pl.altkom.asc.lab.micronaut.poc.serverless.dashboard.service.api.v1.queri
 import pl.altkom.asc.lab.micronaut.poc.serverless.dashboard.service.api.v1.queries.gettotalsalesquery.GetTotalSalesQueryResult;
 
 import javax.validation.constraints.NotNull;
+import io.micronaut.http.annotation.Body;
 
 
 @RequiredArgsConstructor
@@ -43,7 +44,7 @@ public class DashboardController implements DashboardOperations {
     }
 
     @Override
-    public void policyRegisteredNotify(@NotNull PolicyDto policy) {
+    public void policyRegisteredNotify(@NotNull @Body PolicyDto policy) {
         policyRepository.save(new PolicyDocument(
             policy.getNumber(),
             policy.getFrom(),
